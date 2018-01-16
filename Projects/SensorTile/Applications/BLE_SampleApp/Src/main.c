@@ -402,9 +402,13 @@ static void Init_BlueNRG_Stack(void)
   int ret;
   uint8_t  hwVersion;
   uint16_t fwVersion;
-	//
 	
-	IFR_config_TypeDef IFR_config_tmp;
+	uint8_t data[192];
+	uint8_t ii;
+	//
+	const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'B','l','u','e','N','R','G'};
+	uint8_t serviceUUIDList[] = {AD_TYPE_16_BIT_SERV_UUID,0x34,0x12};
+//	IFR_config_TypeDef IFR_config_tmp;
 	
 #ifdef STATIC_BLE_MAC
   {
@@ -440,6 +444,20 @@ static void Init_BlueNRG_Stack(void)
    */
   BlueNRG_RST();
 	
+		ret=program_IFR(&IFR_config);
+	if(ret){
+     STLBLE_PRINTF("\r\nProgram IFR failed\r\n");
+     goto fail;
+  }
+	
+	BlueNRG_RST();
+	
+	ret=read_IFR(data);
+	for(ii=0;ii<192; ii++){
+		STLBLE_PRINTF("\t%x,",data[ii]);		
+	}
+	
+	/*
 	ret=program_IFR(&IFR_config);
 	if(ret){
      STLBLE_PRINTF("\r\nProgram IFR failed\r\n");
@@ -451,14 +469,55 @@ static void Init_BlueNRG_Stack(void)
      STLBLE_PRINTF("\r\nVerify IFR failed\r\n");
      goto fail;
   }
-	
+	*/
 	STLBLE_PRINTF("\r\nVerify IFR OK\r\n");
   	
 	BlueNRG_RST();
-	
-	aci_hal_tone_start(0);
 
-#ifndef STATIC_BLE_MAC
+
+//*************************	
+	STLBLE_PRINTF("\r\nXTAL certering test setting!\r\n");
+	aci_hal_tone_start(0);
+		STLBLE_PRINTF("\r\nXTAL certering test setting OK!\r\n");
+	while(1){;}
+
+//*************************
+
+
+	
+#if 0		
+//*************************
+	
+	STLBLE_PRINTF("\r\nHS_Start_time test setting\r\n");	
+	ret = aci_gatt_init();    
+  if(ret){
+     STLBLE_PRINTF("\r\nGATT_Init failed\r\n");
+     goto fail;
+  }
+	if (TargetBoardFeatures.bnrg_expansion_board == IDB05A1) {
+    ret = aci_gap_init_IDB05A1(GAP_PERIPHERAL_ROLE_IDB05A1, 0, 0x07, &service_handle, &dev_name_char_handle, &appearance_char_handle);
+  } else {
+    ret = aci_gap_init_IDB04A1(GAP_PERIPHERAL_ROLE_IDB04A1, &service_handle, &dev_name_char_handle, &appearance_char_handle);
+  }
+
+  if(ret != BLE_STATUS_SUCCESS){
+     STLBLE_PRINTF("\r\nGAP_Init failed\r\n");
+     goto fail;
+  }
+	
+	ret=aci_gap_set_discoverable(0, 0x20, 0x20,
+                             0x01, 0x03, sizeof(local_name), local_name,
+                                                      sizeof(serviceUUIDList), serviceUUIDList,0,0);
+														 
+	if(ret != BLE_STATUS_SUCCESS){
+     STLBLE_PRINTF("\r\aci_gap_set_discoverable failed\r\n");
+     goto fail;
+  }
+	STLBLE_PRINTF("\r\nHS_Start_time test setting ok\r\n");
+	while(1){;}
+//*************************		
+#endif		
+		#ifndef STATIC_BLE_MAC
   /* Create a Unique BLE MAC */
   {
     bdaddr[0] = (STM32_UUID[1]>>24)&0xFF;

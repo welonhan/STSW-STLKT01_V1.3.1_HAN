@@ -405,7 +405,7 @@ const IFR_config_TypeDef IFR_config = {
   htobs(0x0064), /* Slave SCA = 100 ppm */
   0x03, /* Master SCA = 100 ppm */
   0xFF,
-  htobs(0x0148), /* HS startup time = 800 us */
+  htobs(0x0119), /* HS startup time = 686 us */
   0xFF,0xFF,
   htobl(0xFFFFFFFF), /* UID */
   0xFF,

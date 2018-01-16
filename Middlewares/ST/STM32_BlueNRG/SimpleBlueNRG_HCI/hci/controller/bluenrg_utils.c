@@ -10,6 +10,8 @@
 #include "string.h"
 #include "SensorTile_BlueNRG.h"
 
+#include "main.h"
+
 #define SUPPORTED_BOOTLOADER_VERSION_MIN  3
 #define SUPPORTED_BOOTLOADER_VERSION_MAX  5
 
@@ -329,7 +331,8 @@ uint8_t verify_IFR(const IFR_config_TypeDef *ifr_data)
 {
   uint8_t ifr_updated[READ_BLOCK_SIZE];
   uint8_t version, ret = BLE_STATUS_SUCCESS;
-    
+  
+	  
   aci_updater_start();
   if(aci_get_updater_version(&version))
     return BLE_UTIL_ACI_ERROR;
@@ -338,6 +341,7 @@ uint8_t verify_IFR(const IFR_config_TypeDef *ifr_data)
     if(ret != BLE_STATUS_SUCCESS){
       return ret;
     }
+		
     if (memcmp(ifr_updated, ((uint8_t*)ifr_data)+i, READ_BLOCK_SIZE) != 0)
     {
       ret = BLE_UTIL_WRONG_VERIFY;

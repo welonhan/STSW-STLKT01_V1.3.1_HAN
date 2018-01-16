@@ -64,3 +64,15 @@
 .\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_BlueNRG\SimpleBlueNRG_HCI\includes\osal.h
 .\stm32l476rg_nucleo\bluenrg_utils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Drivers\BSP\SensorTile\SensorTile_BlueNRG.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\Inc\main.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\Inc\console.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_BlueNRG\SimpleBlueNRG_HCI\includes\debug.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\Inc\usbd_cdc_interface.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\Inc\usbd_conf.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h
+.\stm32l476rg_nucleo\bluenrg_utils.o: ..\..\..\..\..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h
